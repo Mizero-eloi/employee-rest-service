@@ -1,5 +1,6 @@
 package com.example.employeerestservice.service;
 
+import com.example.employeerestservice.exception_handler.EmployeeNotFound;
 import com.example.employeerestservice.model.Employee;
 import com.example.employeerestservice.model.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class EmployeeController {
     public Employee getEmployeeById(@PathVariable int empId){
         Employee employee = service.getEmployeeById(empId);
         if (employee == null)
-            throw new RuntimeException("Employee Not Found");
+            throw new EmployeeNotFound("Employee Not Found");
         return employee;
     }
 
