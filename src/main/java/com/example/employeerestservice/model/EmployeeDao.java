@@ -3,6 +3,7 @@ package com.example.employeerestservice.model;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -24,8 +25,23 @@ public class EmployeeDao {
 
     }
 
-    public void saveEmployee(Employee emp) {
+    public Employee saveEmployee(Employee emp) {
         emp.setEmployeeId(list.size() + 1);
         list.add(emp);
+
+        return emp;
+    }
+
+    public Employee deleteEmployee(int empId) {
+        Iterator<Employee> iterator = list.iterator();
+
+        while(iterator.hasNext()){
+            Employee emp = iterator.next();
+            if(empId == emp.getEmployeeId()){
+                iterator.remove();
+                return emp;
+            }
+        }
+        return  null;
     }
 }

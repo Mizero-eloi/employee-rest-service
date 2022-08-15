@@ -1,8 +1,14 @@
 package com.example.employeerestservice.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
 public class Employee {
     private int employeeId;
+    @Size(min = 3, max = 5, message = "Invalid chars for Name")
     private String name;
+
+    @Email
     private String email;
 
     public Employee(int employeeId, String name, String email) {
