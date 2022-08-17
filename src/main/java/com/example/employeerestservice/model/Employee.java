@@ -1,28 +1,49 @@
 package com.example.employeerestservice.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.util.List;
 
+
+@Entity
 public class Employee {
-    private int employeeId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     @Size(min = 3, max = 5, message = "Invalid chars for Name")
     private String name;
 
     @Email
     private String email;
 
-    public Employee(int employeeId, String name, String email) {
-        this.employeeId = employeeId;
+    @OneToMany(mappedBy = "employee")
+    private List<Department> allDepartments;
+
+    public List<Department> getAllDepartments() {
+        return allDepartments;
+    }
+
+    public void setAllDepartments(List<Department> allDepartments) {
+        this.allDepartments = allDepartments;
+    }
+
+    public Employee(int id, String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Employee() {
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
